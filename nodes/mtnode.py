@@ -92,6 +92,9 @@ class XSensDriver(object):
         self.frame_id = get_param('~frame_id', '/base_imu')
 
         self.frame_local = get_param('~frame_local', 'ENU')
+        self.period = get_param('~period', 1152)
+        self.mt.SetPeriod(self.period)
+        rospy.loginfo("Set period to " + str(self.mt.GetPeriod()))
 
         self.angular_velocity_covariance = matrix_from_diagonal(
             get_param_list('~angular_velocity_covariance_diagonal', [radians(0.025)] * 3)
